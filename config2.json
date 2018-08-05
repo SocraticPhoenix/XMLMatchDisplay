@@ -1,0 +1,67 @@
+{
+  "xml": 14,
+  "match": [
+    {
+      "entries": {
+        "left": {
+          "title": "WLMSRequestDisbursementRequestType",
+          "match": {
+            "type": "and",
+            "conditions": [
+              {
+                "type": "tag",
+                "regex": ".*?:WLMSRequestDisbursementRequestType"
+              },
+              {
+                "type": "csv",
+                "index": 7,
+                "literal": "FinanceWLMS"
+              }
+            ]
+          }
+        },
+        "right": {
+          "title": "RequestDisbursementRequestType",
+          "match": {
+            "type": "and",
+            "conditions": [
+              {
+                "type": "tag",
+                "regex": ".*?:RequestDisbursementRequestType"
+              },
+              {
+                "type": "csv",
+                "index": 7,
+                "literal": "WLMSRequestDisbursement"
+              }
+            ]
+          }
+        }
+      },
+      "match": {
+        "type": "xml",
+        "left": ["TransactionID"],
+        "right": ["TransactionID"]
+      },
+      "display": {
+        "type": "sequence",
+        "components": [
+          {
+            "type": "literal",
+            "display": ["step1"]
+          },
+          {
+            "type": "xml",
+            "target": "left",
+            "paths": [["TransactionID"]]
+          },
+          {
+            "type": "xml",
+            "target": "right",
+            "paths": [["TransactionID"]]
+          }
+        ]
+      }
+    }
+  ]
+}

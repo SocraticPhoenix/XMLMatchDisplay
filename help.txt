@@ -1,0 +1,67 @@
+Single Matchers:
+    type: "or"
+    fields: "conditions" (array of single matchers)
+    description: Matches any item which matches any of the conditions
+
+    type: "and"
+    fields: "conditions" (array of single matchers)
+    description: Matches any item which matches all of the conditions
+
+    type: "csv"
+    fields: "index" (index of the column), "literal" OR "regex" (what to look for at the index)
+    description: Matches any item that has a matching string at the given index in the csv
+
+    type: "xml"
+    fields: "path" (array of strings), "literal" OR "regex" (what to look for at the given path)
+    description: Matches any item that has a matching string at the given xml path
+
+    type: "tag"
+    fields: "literal" OR "regex" (what to match the XML name to)
+    description: Matches the name of the root tag of the XML
+
+
+Matchers:
+    type: "or"
+    fields: "conditions" (array of matchers)
+    description: Matches any pair which matches any of the conditions
+
+    type: "and"
+    fields: "conditions" (array of matchers)
+    description: Matches any pair which matches all of the conditions
+
+    type: "csv"
+    fields: "left" (index of first item), "right" (index of second item), "regex" OPTIONAL (optional regex to match both items)
+    description: Matches two items which either have the same csv field or fields which match a given regex
+
+    type: "xml"
+    fields: "left" (path of first item), "right" (path of second item), "regex" OPTIONAL (optional regex to match both items)
+    description: Matches two items which either have the same xml field or fields which match a given regex
+
+    type: "xml2csv"
+    fields: "left" (path of first item), "right" (index of second item), "regex" OPTIONAL (optional regex to match both items)
+    description: Matches two items which have an xml field corresponding to a csv field
+
+    type: "csv2xml"
+    fields: "left" (index of first item), "right" (path of second item), "regex" OPTIONAL (optional regex to match both items)
+    description: Matches two items which have an xml field corresponding to a csv field
+
+    type: "dual"
+    fields: "left" (single matcher), "right" (single matcher)
+    description: Matches two items which satisfy two single matchers
+
+Display Handlers:
+    type: "sequence"
+    fields: "components" (array of display handlers)
+    description: Inserts a sequence of information into the output
+
+    type: "xml"
+    fields: "paths" (array of paths), "target" (left, right, or both)
+    description: Extracts information from the xml for display
+
+    type: "csv"
+    fields: "indices" (array of indices), "target" (left, right, or both)
+    description: Extracts information from the csv for display
+
+    type: "literal"
+    fields: "display" (array of strings)
+    description: Inserts literals into the output

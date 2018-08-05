@@ -1,0 +1,63 @@
+{
+  "xml": 1,
+  "match": [
+    {
+      "entries": {
+        "left": {
+          "title": "CreateActorBankAccountRequest",
+          "match": {
+            "type": "tag",
+            "regex": ".*?:CreateActorBankAccountRequest"
+          }
+        },
+        "right": {
+          "title": "CreateActorBankAccountResponse",
+          "match": {
+            "type": "tag",
+            "regex": ".*?:CreateActorBankAccountResponse"
+          }
+        }
+      },
+      "match": {
+        "type": "and",
+        "conditions": [
+          {
+            "type": "xml",
+            "left": ["actorbankaccountcreationrequestvo", "loanid"],
+            "right": ["actorbankaccountcreationresponsevo", "loanid"]
+          },
+          {
+            "type": "xml",
+            "left": ["actorbankaccountcreationrequestvo", "sequencenumber"],
+            "right": ["actorbankaccountcreationresponsevo", "sequencenumber"]
+          },
+          {
+            "type": "csv",
+            "left": 0,
+            "right": 0
+          }
+        ]
+      },
+      "display": {
+        "type": "sequence",
+        "components": [
+          {
+            "type": "xml",
+            "target": "left",
+            "paths": [["actorbankaccountcreationrequestvo", "transactiontype"], ["actorbankaccountcreationrequestvo", "transactionid"], ["actorbankaccountcreationrequestvo", "acronym"], ["actorbankaccountcreationrequestvo", "loanid"], ["actorbankaccountcreationrequestvo", "sequencenumber"]]
+          },
+          {
+            "type": "xml",
+            "target": "right",
+            "paths": [["actorbankaccountcreationresponsevo", "ribid"]]
+          },
+          {
+            "type": "xml",
+            "target": "left",
+            "paths": [["actorbankaccountcreationrequestvo", "beneficiarybankaccountnumber"], ["actorbankaccountcreationrequestvo", "beneficiaryname"]]
+          }
+        ]
+      }
+    }
+  ]
+}
