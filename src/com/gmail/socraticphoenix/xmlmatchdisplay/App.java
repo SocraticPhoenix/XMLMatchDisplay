@@ -23,6 +23,7 @@ import java.util.*;
 public class App {
     private static boolean showErrors = false;
     private static boolean showIncomplete = false;
+    private static boolean showHeaders = false;
 
     public static void main(String[] args) throws IOException {
         if (args.length < 2) {
@@ -39,6 +40,8 @@ public class App {
                 showErrors = true;
             } else if (k.equals("-incomplete")) {
                 showIncomplete = true;
+            } else if (k.equals("-headers")) {
+                showHeaders = true;
             }
         }
 
@@ -123,28 +126,28 @@ public class App {
             }
         }
 
-        System.out.println("**Completed Matches**");
+        if (showHeaders) System.out.println("**Completed Matches**");
         for (Map.Entry<MatchUnit, List<List<Matchable>>> entry : finalResults.entrySet()) {
             MatchUnit spec = entry.getKey();
-            System.out.println("[" + spec.getLeftTitle() + ", " + spec.getRightTitle() + "]");
+            if (showHeaders) System.out.println("[" + spec.getLeftTitle() + ", " + spec.getRightTitle() + "]");
             for (List<Matchable> matches : entry.getValue()) {
                 Matchable left = matches.get(0);
                 Matchable right = matches.get(1);
                 System.out.println(toCsv(spec.getDisplay().extract(left, right)));
             }
-            System.out.println("-------------------------------------------------------------");
+            if (showHeaders) System.out.println("-------------------------------------------------------------");
         }
         if(showIncomplete) {
-            System.out.println("**Incomplete Matches**");
+            if (showHeaders) System.out.println("**Incomplete Matches**");
             for (Map.Entry<MatchUnit, List<List<Matchable>>> entry : unmatched.entrySet()) {
                 MatchUnit spec = entry.getKey();
-                System.out.println("[" + spec.getLeftTitle() + ", " + spec.getRightTitle() + "]");
+                if (showHeaders) System.out.println("[" + spec.getLeftTitle() + ", " + spec.getRightTitle() + "]");
                 for (List<Matchable> matches : entry.getValue()) {
                     Matchable left = matches.get(0);
                     Matchable right = matches.get(1);
                     System.out.println(toCsv(spec.getDisplay().extract(left, right)));
                 }
-                System.out.println("-------------------------------------------------------------");
+                if (showHeaders) System.out.println("-------------------------------------------------------------");
             }
         }
     }
