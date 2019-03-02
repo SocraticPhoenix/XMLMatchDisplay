@@ -1,0 +1,80 @@
+//Plugins
+plugins {
+    id "net.ltgt.apt" version "0.10"
+    id "com.github.johnrengelman.shadow" version "2.0.1"
+}
+
+apply plugin : 'java'
+apply plugin : 'maven'
+apply plugin : 'idea'
+//End Plugins
+
+//Program Specific Variables
+def programVersion = "0.0.1"
+def programGroup = "com.gmail.socraticphoenix"
+//End Variables
+
+//Gradle Variables
+group = "$programGroup"
+version = "$programVersion"
+sourceCompatibility = 1.8
+//End Gradle Variables
+
+configurations {
+    library
+    compile.extendsFrom library
+    runtime.extendsFrom library
+}
+
+//Repositories and Dependencies
+repositories {
+    mavenCentral()
+
+    maven {
+        name "jitpack.io"
+        url "https://jitpack.io"
+    }
+
+}
+
+dependencies {
+    library "org.json:json:20171018"
+    library "com.github.SocraticPhoenix:Parse:master-SNAPSHOT"
+    library "com.github.SocraticPhoenix:Collect:master-SNAPSHOT"
+    library "org.apache.commons:commons-csv:1.6"
+}
+//End Repositories and Dependencies
+
+jar {
+    manifest {
+        attributes("Main-Class": "com.gmail.socraticphoenix.xmlmatchdisplay.App")
+    }
+}
+
+//Tasks
+task sourceJar(type: Jar) {
+    classifier = "source"
+    from sourceSets.main.allJava
+}
+
+task javadocJar(type: Jar, dependsOn: javadoc){
+    classifier = "javadoc"
+    from javadoc.destinationDir
+}
+
+javadoc {
+    destinationDir = file("docs")
+}
+
+shadowJar {
+    classifier = "shadow"
+    manifest {
+        attributes("Main-Class": "com.gmail.socraticphoenix.xmlmatchdisplay.App")
+    }}
+//End Tasks
+
+//Configurations
+configurations.all {
+    resolutionStrategy.cacheChangingModulesFor 0, 'seconds'
+}
+//End configurations
