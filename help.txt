@@ -12,7 +12,7 @@ Single Matchers:
     description: Matches any item that has a matching string at the given index in the csv
 
     type: "xml"
-    fields: "path" (array of strings), "literal" OR "regex" (what to look for at the given path)
+    fields: "path" (array of strings), "literal" OR "regex" (what to look for at the given path), "index" OPTIONAL (optional index of the xml string in the csv file)
     description: Matches any item that has a matching string at the given xml path
 
     type: "tag"
@@ -34,15 +34,15 @@ Matchers:
     description: Matches two items which either have the same csv field or fields which match a given regex
 
     type: "xml"
-    fields: "left" (path of first item), "right" (path of second item), "regex" OPTIONAL (optional regex to match both items)
+    fields: "left" (path of first item), "right" (path of second item), "regex" OPTIONAL (optional regex to match both items), "leftIndex" OPTIONAL (optional index of the xml string in the csv file for the left item), "rightIndex" OPTIONAL (optional index of the xml string in the csv file for the right item)
     description: Matches two items which either have the same xml field or fields which match a given regex
 
     type: "xml2csv"
-    fields: "left" (path of first item), "right" (index of second item), "regex" OPTIONAL (optional regex to match both items)
+    fields: "left" (path of first item), "right" (index of second item), "regex" OPTIONAL (optional regex to match both items), "leftIndex" OPTIONAL (optional index of the xml string in the csv file for the left item)
     description: Matches two items which have an xml field corresponding to a csv field
 
     type: "csv2xml"
-    fields: "left" (index of first item), "right" (path of second item), "regex" OPTIONAL (optional regex to match both items)
+    fields: "left" (index of first item), "right" (path of second item), "regex" OPTIONAL (optional regex to match both items), "rightIndex" OPTIONAL (optional index of the xml string in the csv file for the right item)
     description: Matches two items which have an xml field corresponding to a csv field
 
     type: "dual"
@@ -55,7 +55,7 @@ Display Handlers:
     description: Inserts a sequence of information into the output
 
     type: "xml"
-    fields: "paths" (array of paths), "target" (left, right, or both)
+    fields: "paths" (array of paths), "target" (left, right, or both), "index" OPTIONAL (optional index of the xml string in the csv file)
     description: Extracts information from the xml for display
 
     type: "csv"
